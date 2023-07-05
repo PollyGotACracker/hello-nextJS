@@ -24,7 +24,7 @@
 
 ### 3. Router, Route 컴포넌트 구현
 
-```js
+```tsx
 // main.tsx
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
@@ -38,16 +38,33 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
 
 - constants 폴더에서 `PATH` 를 import 하여 상수를 관리했습니다.
 
+```tsx
+// Router.tsx
+const Router: React.FC<Props> = ({ children }) => {
+  return children;
+};
+```
+
+```tsx
+// Route.tsx
+const Route: React.FC<Props> = ({ path, component }) => {
+  const { currentPath } = useRouter();
+  return currentPath === path ? component : <></>;
+};
+```
+
+- Route.tsx 컴포넌트에서 현재 pathname 과 컴포넌트의 path 를 비교합니다.
+
 ### 4. 최소한의 push 기능을 가진 useRouter Hook 작성
 
-```js
+```tsx
 const { push } = useRouter();
 ```
 
 - useRouter.ts 에서 `useState`, `useEffect` 를 사용해 eventListener callback 에서 현재 pathname 을 저장합니다.  
   해당 custom hook 이 return 하는 `currentPath`, `push()`, `back()` 은 Button.tsx, Route.tsx 에서 페이지 이동 및 pathname 체크에 사용되었습니다.
 
-```js
+```tsx
 // useRouter.ts
 return {
   // ...
