@@ -1,5 +1,5 @@
 ---
-slug: frontend-is-boring
+slug: classname-did-not-match
 categories:
   - Development
   - Next.js
