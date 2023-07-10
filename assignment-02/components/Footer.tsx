@@ -13,7 +13,12 @@ const Footer: React.FC<FooterProps> = ({ aHref, imgSrc, imgAlt, text }) => {
     <footer className={styles.footer}>
       <a href={aHref} target="_blank" rel="noopener noreferrer">
         <span className={styles.logo}>
-          <Image src={imgSrc} alt={imgAlt} width={24} height={24} />
+          <Image
+            src={`${process.env.NEXT_PUBLIC_BASE_URL}${imgSrc}`}
+            alt={imgAlt}
+            width={24}
+            height={24}
+          />
           {text}
         </span>
       </a>

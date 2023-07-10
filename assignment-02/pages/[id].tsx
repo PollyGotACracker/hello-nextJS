@@ -44,6 +44,9 @@ const StyledBody = styled.div`
   }
 `;
 
+// getStaticPaths: 동적 라우팅 시, return 한 모든 경로를
+// 정적으로 pre-rendering
+// return 된 값은 getStaticProps 로 전달
 export const getStaticPaths = () => {
   const paths = getPostIds();
   return {
@@ -61,8 +64,8 @@ export const getStaticPaths = () => {
 type Params = {
   params: { id: string };
 };
-
-// params: getStaticPaths() 에서 return 한 값
+// getStaticProps: getStaticPaths 에서 return 한 값을 사용하여
+// build 시 현재 페이지 미리 rendering
 export const getStaticProps = async ({ params }: Params) => {
   const postData = await getPost(params.id);
   return {

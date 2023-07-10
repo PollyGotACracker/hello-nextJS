@@ -112,7 +112,6 @@
   align-items: center;
   gap: 10px;
   height: 1em;
-  margin-left: 0.5rem;
 }
 
 @media (max-width: 600px) {
