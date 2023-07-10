@@ -1,6 +1,5 @@
 import React from "react";
 import PATH from "../constants/path";
-import useRouter from "../hooks/useRouter";
 
 type Props = {
   path: PATH;
@@ -8,8 +7,8 @@ type Props = {
 };
 
 const Route: React.FC<Props> = ({ path, component }) => {
-  const { currentPath } = useRouter();
-  return currentPath === path ? component : <></>;
+  if (!path) throw new Error("No path specified");
+  return component;
 };
 
 export default Route;

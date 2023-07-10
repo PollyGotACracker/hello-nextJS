@@ -1,0 +1,7 @@
+{
+  "extends": ["next/core-web-vitals"],
+  "plugins": ["styled-components"],
+  "rules": {
+    "@next/next/no-document-import-in-page": "off"
+  }
+}

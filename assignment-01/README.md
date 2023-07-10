@@ -3,6 +3,11 @@
 - 전유영
 - Vite, TypeScript, Styled-Components 사용
 
+## :pushpin: 코드 수정
+
+- 처음에는 Router 에서 children 을 순회해 path 에 맞는 Route 컴포넌트를 return 하는 방법을 생각했다. 코드를 짜면서 고민한 결과, 현재 path 가 변경될 때마다 반복문이 실행되는 것이 비효율적이라 느꼈고, 각 Route 에서 path props 를 어떻게 처리해야 할지 모르겠어서 Route 에서 조건 처리를 하기로 결정했다.
+- _그러나 컴포넌트가 눈에 보이지 않더라도, 일단 컴포넌트가 마운트되면 그 내부 코드는 전부 실행된다._ 따라서 상위 컴포넌트에서 하위 컴포넌트의 마운트 여부를 처리하는 것이 효율적이다. 따라서 처음 생각했던 방식이 오히려 맞는 것이었다.
+
 ## 과제 1) Next.js 프로젝트에서 yarn start(or npm run start) 스크립트를 실행했을 때 실행되는 코드 설명
 
 - [notion 페이지](https://pollygotacracker.notion.site/1-1-1de729e91498468aa5feb190bc51eb05)
@@ -41,19 +46,22 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
 ```tsx
 // Router.tsx
 const Router: React.FC<Props> = ({ children }) => {
-  return children;
+  const { currentPath } = useRouter();
+  const childArray = Array.isArray(children) ? children : [children];
+
+  return childArray.filter((route) => route.props.path === currentPath);
 };
 ```
 
 ```tsx
 // Route.tsx
 const Route: React.FC<Props> = ({ path, component }) => {
-  const { currentPath } = useRouter();
-  return currentPath === path ? component : <></>;
+  if (!path) throw new Error("No path specified");
+  return component;
 };
 ```
 
-- Route.tsx 컴포넌트에서 현재 pathname 과 컴포넌트의 path 를 비교합니다.
+- Router.tsx 컴포넌트에서 현재 pathname 과 일치하는 path 를 가진 Route 컴포넌트를 반환합니다.
 
 ### 4. 최소한의 push 기능을 가진 useRouter Hook 작성
 
@@ -68,7 +76,7 @@ const { push } = useRouter();
 // useRouter.ts
 return {
   // ...
-  push: ({ state, path }: PushProps) => {
+  push: ({ state, path }: PushParams) => {
     const url = location.origin + path;
     const event = new PopStateEvent("popstate", { state: state });
     history.pushState(state, "", url);
