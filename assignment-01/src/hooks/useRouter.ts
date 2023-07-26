@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import PATH from "../constants/path";
 
-type PushProps = {
+type PushParams = {
   state?: object;
   path: PATH;
 };
@@ -20,7 +20,7 @@ const useRouter = () => {
 
   return {
     currentPath,
-    push: ({ state, path }: PushProps) => {
+    push: ({ state, path }: PushParams) => {
       const url = location.origin + path;
       const event = new PopStateEvent("popstate", { state: state });
       history.pushState(state, "", url);
