@@ -28,7 +28,7 @@ const nextConfig = {
 module.exports = nextConfig;
 ```
 
-## env.production
+## .env.production
 
 ```
 GENERATE_SOURCEMAP = false
