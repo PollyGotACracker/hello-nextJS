@@ -31,3 +31,9 @@
 ## `isValidElement()`
 
 - 값이 React 요소인지 체크(에러 처리용)
+
+## RFC
+
+- ‘Request For Comments’의 약자
+- 실제 구현에 들어가기 전에 어떠한 방식으로 구현할 계획인지 아이디어를 교환하는 단계
+- RFC(Request for Comments) 문서는 "의견을 요청하는 문서"라는 의미로, 국제 인터넷 표준화 기구(IETF; Internet Engineering Task Force)에서 관리하는 기술 표준
