@@ -19,6 +19,7 @@ const List: React.FC<{ posts: PostData[] }> = ({ posts }) => {
 };
 
 const StyledUl = styled.ul`
+  padding-inline-start: 0;
   width: 100%;
   display: flex;
   flex-direction: column;
